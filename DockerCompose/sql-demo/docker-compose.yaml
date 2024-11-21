@@ -1,0 +1,23 @@
+version: '3.8'
+
+services:
+  mssql:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: my-mssql-container
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=YourStrong!Passw0rd
+    ports:
+      - "1438:1433"   # Host port to container port mapping
+    volumes:
+      - mssql_data:/var/opt/mssql  # Volume for persistent data
+    networks:
+      - mssql_network
+    restart: unless-stopped
+
+volumes:
+  mssql_data:   # Define the named volume for persistent storage
+
+networks:
+  mssql_network:
+    driver: bridge

@@ -1,0 +1,11 @@
+version: "3.0"
+services:
+  ubuntu:
+    image: ubuntu
+    command: env
+    env_file:
+    - my.env
+    environment:
+    - app.name=env-variables-demo
+    - services.ur=google.com
+    - input=56

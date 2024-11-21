@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql:8.0   # Use MySQL 8.0 image
+    container_name: mysql-container
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword  # Root password for MySQL
+      MYSQL_DATABASE: mydatabase        # A database that will be created on startup
+      MYSQL_USER: myuser                # A non-root user
+      MYSQL_PASSWORD: mypassword        # Password for the non-root user
+    ports:
+      - "3308:3306"  # Map MySQL port from container to host
+    volumes:
+      - mysql_data:/var/lib/mysql  # Volume to persist data
+    restart: unless-stopped
+    networks:
+      - mysql_network
+
+volumes:
+  mysql_data:  # Named volume for MySQL data
+
+networks:
+  mysql_network:
+    driver: bridge
